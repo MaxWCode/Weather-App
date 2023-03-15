@@ -14,7 +14,7 @@ def weather():
         city = request.form['city']
         print(city)
     # Replace YOUR_API_KEY with the actual API key obtained from OpenWeatherMap
-    url = f'https://api.openweathermap.org/data/2.5/weather?{city}&appid={apiKey}&units=metric'
+        url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric'
     
     # Fetch the data from the API
     response = requests.get(url)
@@ -22,12 +22,12 @@ def weather():
 
     # Extract relevant data from the API response
     description = data['weather'][0]['description']
-    temperature = data['main']['temp']
+    temp = data['main']['temp']
     humidity = data['main']['humidity']
 
     # Return the weather data in the response
     # return f'{city} weather: {description}, Temperature: {temperature} C, Humidity: {humidity}%'
-    return render_template('weather.html')
+    return render_template('index.html', temp = temp, description = description, humidity = humidity)
     
 if __name__ == '__main__':
     app.run()
